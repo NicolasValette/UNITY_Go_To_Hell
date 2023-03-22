@@ -1,4 +1,6 @@
+using Gotohell.Dice;
 using Gotohell.FSMPoolDice;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal;
@@ -9,6 +11,8 @@ namespace Gotohell
 {
     public class InputManager : MonoBehaviour
     {
+
+        public static event Action<Transform> OnDragDice;
         // Start is called before the first frame update
         void Start()
         {
@@ -30,8 +34,9 @@ namespace Gotohell
                 RaycastHit hit;
                 if (Physics.Raycast(rayToMouse, out hit))
                 {
-                    if (hit.transform.gameObject.GetComponent<DicePoolFSM>() != null)
+                    if (hit.transform.gameObject.GetComponent<DiceBehaviour>() != null)
                     {
+                        OnDragDice?.Invoke(hit.transform.gameObject.transform.parent);
                         return true ;
                     }
                 }

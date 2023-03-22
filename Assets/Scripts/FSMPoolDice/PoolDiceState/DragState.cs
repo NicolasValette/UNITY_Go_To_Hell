@@ -1,4 +1,6 @@
 
+using UnityEngine;
+
 namespace Gotohell.FSMPoolDice.PoolDiceState
 {
     public class DragState : State
@@ -8,7 +10,7 @@ namespace Gotohell.FSMPoolDice.PoolDiceState
         }
         public override void EnterState()
         {
-            
+            Cursor.visible = false;
         }
         public override void Execute()
         {
@@ -18,6 +20,7 @@ namespace Gotohell.FSMPoolDice.PoolDiceState
         public override void ExitState()
         {
             _fsm.Roll();
+            Cursor.visible = true;
         }
         public override State Transition()
         {

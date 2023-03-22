@@ -1,3 +1,4 @@
+using Gotohell.Dice;
 using Gotohell.FSMPoolDice.PoolDiceState;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,15 +14,34 @@ namespace Gotohell.FSMPoolDice
         private GameObject _dice;
         [SerializeField]
         private float _launchForce = 5f;
+        [SerializeField]
+        private DiceManager _diceManager;
         private State _currentState;
         private InputManager _inputManager;
+        public Transform SelectedPool { get; private set; }
+
+
+        private List<GameObject> _listOfDice;
         // Start is called before the first frame update
+        private void Awake()
+        {
+            _listOfDice = new List<GameObject>();
+        }
         void Start()
         {
             _currentState = new WaitingState(this);
             _inputManager = GetComponent<InputManager>();
-        }
 
+            
+        }
+        private void OnEnable()
+        {
+            InputManager.OnDragDice += SelectPool;
+        }
+        private void OnDisable()
+        {
+            InputManager.OnDragDice -= SelectPool;
+        }
         // Update is called once per frame
         void Update()
         {
@@ -47,14 +67,14 @@ namespace Gotohell.FSMPoolDice
         public Vector3 GetHandPosition ()
         {
             Vector3 pos = _inputManager.GetPosition();
-            pos.y = 5f;
+            pos.y = 2f;
             return pos;
             
         }
 
         public void MoveDice()
         {
-            transform.position = GetHandPosition();
+            SelectedPool.position = GetHandPosition();
         }
 
         public bool DiceIsRelease()
@@ -66,8 +86,20 @@ namespace Gotohell.FSMPoolDice
             Vector2 vect = _inputManager.GetCursorDeltaPos();
             Vector3 dir = new Vector3(vect.x, 0f, vect.y);
             Debug.Log("Roll");
-            _dice.GetComponent<Rigidbody>().AddForce(dir.normalized * _launchForce, ForceMode.Impulse);
-            _dice.GetComponent<Rigidbody>().AddTorque(Random.insideUnitSphere * 25);
+            for (int i = 0; i < _listOfDice.Count; i++)
+            {
+                _listOfDice[i].GetComponent<Rigidbody>().AddForce(dir.normalized * _launchForce, ForceMode.Impulse);
+                _listOfDice[i].GetComponent<Rigidbody>().AddTorque(Random.insideUnitSphere * 25);
+            }
+            
+        }
+        public void AddDice(GameObject dice)
+        {
+            _listOfDice.Add(dice);
+        }
+        public void SelectPool(Transform pool)
+        {
+            SelectedPool= pool;
         }
     }
 }
