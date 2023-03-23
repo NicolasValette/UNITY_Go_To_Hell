@@ -1,5 +1,6 @@
 using Gotohell.Dice;
 using Gotohell.FSMPoolDice;
+using Gotohell.Manager;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -11,8 +12,9 @@ namespace Gotohell.UI
     public class UIHandler : MonoBehaviour
     {
         [SerializeField]
-        private TMP_Text _text;
-        private List<int> _valueToDisplay;
+        private TMP_Text _valueText;
+        [SerializeField]
+        private TMP_Text _deadsToDisplay;
 
         private string _displayText;
         private StringBuilder _strbuilder;
@@ -21,19 +23,20 @@ namespace Gotohell.UI
         // Start is called before the first frame update
         void Start()
         {
-            _valueToDisplay = new List<int>();
             _strbuilder= new StringBuilder();
-            _text.text = "Let's Roll Dices !";
+            _valueText.text = "Let's Roll Dices !";
             _strbuilder.AppendLine("Dice Values : ");
             _diceDisplayed = 0;
         }
         private void OnEnable()
         {
             DicePoolFSM.UpdateDisplay += AddValueToDisplay;
+            DeadsManager.DisplayScoreToBeat += DisplayDeadsScore;
         }
         private void OnDisable()
         {
             DicePoolFSM.UpdateDisplay -= AddValueToDisplay;
+            DeadsManager.DisplayScoreToBeat -= DisplayDeadsScore;
         }
         // Update is called once per frame
         void Update()
@@ -60,7 +63,12 @@ namespace Gotohell.UI
             //        break;
 
             //}
-            _text.text = _strbuilder.ToString();
+            _valueText.text = _strbuilder.ToString();
         }
+        public void DisplayDeadsScore(int score)
+        {
+            _deadsToDisplay.text = $"Beat {score} to take their souls";
+        }
+
     }
 }

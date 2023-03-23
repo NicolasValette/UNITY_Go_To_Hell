@@ -11,6 +11,7 @@ namespace Gotohell.FSMPoolDice.PoolDiceState
         public override void EnterState()
         {
             Cursor.visible = false;
+            _fsm.DragPoolDice();
         }
         public override void Execute()
         {

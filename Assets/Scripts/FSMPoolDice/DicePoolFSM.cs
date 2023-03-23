@@ -18,6 +18,8 @@ namespace Gotohell.FSMPoolDice
         private float _launchForce = 5f;
         [SerializeField]
         private DiceManager _diceManager;
+        [SerializeField]
+        private float _offset = 2;
         private State _currentState;
         private InputManager _inputManager;
         public Transform SelectedPool { get; private set; }
@@ -75,11 +77,17 @@ namespace Gotohell.FSMPoolDice
         public Vector3 GetHandPosition ()
         {
             Vector3 pos = _inputManager.GetPosition();
-            pos.y = 2f;
+            pos.y += _offset;
             return pos;
             
         }
-
+        public void DragPoolDice()
+        {
+            for (int i = 0; i < _listOfDice.Count; i++)
+            {
+                _listOfDice[i].GetComponent<Rigidbody>().useGravity = false;
+            }
+        }
         public void MoveDice()
         {
             SelectedPool.position = GetHandPosition();
@@ -96,6 +104,7 @@ namespace Gotohell.FSMPoolDice
             Debug.Log("Roll");
             for (int i = 0; i < _listOfDice.Count; i++)
             {
+                _listOfDice[i].GetComponent<Rigidbody>().useGravity = true;
                 _listOfDice[i].GetComponent<Rigidbody>().AddForce(dir.normalized * _launchForce, ForceMode.Impulse);
                 _listOfDice[i].GetComponent<Rigidbody>().AddTorque(UnityEngine.Random.insideUnitSphere * 25);
                 _listOfDice[i].GetComponent<DiceBehaviour>().Launch();
