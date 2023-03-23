@@ -1,7 +1,9 @@
 using Gotohell.Dice;
 using Gotohell.FSMPoolDice.PoolDiceState;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Gotohell.FSMPoolDice
@@ -20,8 +22,10 @@ namespace Gotohell.FSMPoolDice
         private InputManager _inputManager;
         public Transform SelectedPool { get; private set; }
 
-
+        public List<DiceFace> Values { get; private set; }
         private List<GameObject> _listOfDice;
+
+        public static event Action<DiceFace> UpdateDisplay;
         // Start is called before the first frame update
         private void Awake()
         {
@@ -31,7 +35,7 @@ namespace Gotohell.FSMPoolDice
         {
             _currentState = new WaitingState(this);
             _inputManager = GetComponent<InputManager>();
-
+            Values= new List<DiceFace>();
             
         }
         private void OnEnable()
@@ -41,6 +45,10 @@ namespace Gotohell.FSMPoolDice
         private void OnDisable()
         {
             InputManager.OnDragDice -= SelectPool;
+            for (int i=0; i< _listOfDice.Count; i++)
+            {
+                _listOfDice[i].GetComponent<DiceBehaviour>().OnRollFinished -= ReadDiceValue;
+            }
         }
         // Update is called once per frame
         void Update()
@@ -89,17 +97,25 @@ namespace Gotohell.FSMPoolDice
             for (int i = 0; i < _listOfDice.Count; i++)
             {
                 _listOfDice[i].GetComponent<Rigidbody>().AddForce(dir.normalized * _launchForce, ForceMode.Impulse);
-                _listOfDice[i].GetComponent<Rigidbody>().AddTorque(Random.insideUnitSphere * 25);
+                _listOfDice[i].GetComponent<Rigidbody>().AddTorque(UnityEngine.Random.insideUnitSphere * 25);
+                _listOfDice[i].GetComponent<DiceBehaviour>().Launch();
             }
             
         }
         public void AddDice(GameObject dice)
         {
             _listOfDice.Add(dice);
+            dice.GetComponent<DiceBehaviour>().OnRollFinished += ReadDiceValue;
         }
         public void SelectPool(Transform pool)
         {
             SelectedPool= pool;
+        }
+        public void ReadDiceValue(DiceFace face)
+        {
+            Debug.Log("ReadDiceVaue : " + face.ToString());
+            Values.Add(face);
+            UpdateDisplay?.Invoke(face);
         }
     }
 }
