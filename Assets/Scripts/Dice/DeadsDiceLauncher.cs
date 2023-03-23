@@ -11,6 +11,8 @@ public class DeadsDiceLauncher : MonoBehaviour
     private Transform _diceSpawn;
     [SerializeField]
     private float _launchForce;
+
+    private GameObject _actualDice;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,15 +27,21 @@ public class DeadsDiceLauncher : MonoBehaviour
     private void OnEnable()
     {
         DiceManager.NewWave += LaunchDice;
+        DiceManager.CleanWave += DestroyDice;
     }
     private void OnDisable()
     {
         DiceManager.NewWave -= LaunchDice;
+        DiceManager.CleanWave += DestroyDice;
     }
     public void LaunchDice()
     {
-        GameObject go = Instantiate(_deadsDicePrefab, _diceSpawn.position, Quaternion.identity);
-        go.GetComponent<Rigidbody>().AddForce(_diceSpawn.forward * _launchForce, ForceMode.Impulse);
-        go.GetComponent<Rigidbody>().AddTorque(Random.insideUnitSphere * 10);
+        _actualDice = Instantiate(_deadsDicePrefab, _diceSpawn.position, Quaternion.identity);
+        _actualDice.GetComponent<Rigidbody>().AddForce(_diceSpawn.forward * _launchForce, ForceMode.Impulse);
+        _actualDice.GetComponent<Rigidbody>().AddTorque(Random.insideUnitSphere * 10);
+    }
+    public void DestroyDice()
+    {
+        Destroy(_actualDice);
     }
 }

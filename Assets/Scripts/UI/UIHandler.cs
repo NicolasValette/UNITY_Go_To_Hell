@@ -15,32 +15,50 @@ namespace Gotohell.UI
         private TMP_Text _valueText;
         [SerializeField]
         private TMP_Text _deadsToDisplay;
+        [SerializeField]
+        private Color _winColor;
+        [SerializeField]
+        private Color _looseColor;
+        [SerializeField]
+        private DiceManager _diceManager;
 
         private string _displayText;
         private StringBuilder _strbuilder;
         private int _diceDisplayed;
+        private int _scoreDeath;
 
         // Start is called before the first frame update
         void Start()
         {
-            _strbuilder= new StringBuilder();
-            _valueText.text = "Let's Roll Dices !";
-            _strbuilder.AppendLine("Dice Values : ");
-            _diceDisplayed = 0;
+            InitUI();
         }
         private void OnEnable()
         {
-            DicePoolFSM.UpdateDisplay += AddValueToDisplay;
-            DeadsManager.DisplayScoreToBeat += DisplayDeadsScore;
+            DiceManager.NewWave += InitUI;
+            DicePoolFSM.UpdateDice += AddValueToDisplay;
+            DeadsManager.ScoreToBeat += DisplayDeadsScore;
+            DiceManager.RoundWin += RoundWin;
         }
         private void OnDisable()
         {
-            DicePoolFSM.UpdateDisplay -= AddValueToDisplay;
-            DeadsManager.DisplayScoreToBeat -= DisplayDeadsScore;
+            DiceManager.NewWave -= InitUI;
+            DicePoolFSM.UpdateDice -= AddValueToDisplay;
+            DeadsManager.ScoreToBeat -= DisplayDeadsScore;
+            DiceManager.RoundWin -= RoundWin;
         }
         // Update is called once per frame
         void Update()
         {
+            string str = ("Dice Values : " + _diceManager.DeathScore + "\n" + _strbuilder.ToString());
+            
+            _valueText.text = str;
+        }
+        public void InitUI()
+        {
+            _strbuilder = new StringBuilder();
+            _valueText.text = "Let's Roll Dices !";
+            _strbuilder.AppendLine("Dice Values : ");
+            _diceDisplayed = 0;
         }
         public void AddValueToDisplay(DiceFace face)
         {
@@ -63,11 +81,16 @@ namespace Gotohell.UI
             //        break;
 
             //}
-            _valueText.text = _strbuilder.ToString();
+            
         }
         public void DisplayDeadsScore(int score)
         {
             _deadsToDisplay.text = $"Beat {score} to take their souls";
+            _deadsToDisplay.color = _looseColor;
+        }
+        public void RoundWin()
+        {
+            _deadsToDisplay.color = _winColor;
         }
 
     }

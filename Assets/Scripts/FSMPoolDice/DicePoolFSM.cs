@@ -27,17 +27,18 @@ namespace Gotohell.FSMPoolDice
         public List<DiceFace> Values { get; private set; }
         private List<GameObject> _listOfDice;
 
-        public static event Action<DiceFace> UpdateDisplay;
+        private Vector3 _initialPosition;
+        public static event Action<DiceFace> UpdateDice;
+        public static event Action OnRollFinished;
         // Start is called before the first frame update
         private void Awake()
         {
             _listOfDice = new List<GameObject>();
+            
         }
         void Start()
         {
-            _currentState = new WaitingState(this);
-            _inputManager = GetComponent<InputManager>();
-            Values= new List<DiceFace>();
+            InitFSM();
             
         }
         private void OnEnable()
@@ -62,7 +63,12 @@ namespace Gotohell.FSMPoolDice
                 ChangeState(_nextState);
             }
         }
-
+        public void InitFSM()
+        {
+            _currentState = new WaitingState(this);
+            _inputManager = GetComponent<InputManager>();
+            Values = new List<DiceFace>();
+        }
         private void ChangeState(State _nextState)
         {
             _currentState.ExitState();
@@ -116,6 +122,15 @@ namespace Gotohell.FSMPoolDice
             _listOfDice.Add(dice);
             dice.GetComponent<DiceBehaviour>().OnRollFinished += ReadDiceValue;
         }
+        public void ClearPool()
+        {
+            for (int i=0;i< _listOfDice.Count;i++)
+            {
+                _listOfDice[i].GetComponent<DiceBehaviour>().OnRollFinished -= ReadDiceValue;
+            }
+            _listOfDice.Clear();
+            Values.Clear();
+        }
         public void SelectPool(Transform pool)
         {
             SelectedPool= pool;
@@ -124,7 +139,11 @@ namespace Gotohell.FSMPoolDice
         {
             Debug.Log("ReadDiceVaue : " + face.ToString());
             Values.Add(face);
-            UpdateDisplay?.Invoke(face);
+            UpdateDice?.Invoke(face);
+            if (Values.Count == _listOfDice.Count) 
+            {
+                OnRollFinished?.Invoke();
+            }
         }
     }
 }
