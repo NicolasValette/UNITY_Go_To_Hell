@@ -23,18 +23,22 @@ namespace Gotohell.Dice
         // Start is called before the first frame update
         void Start()
         {
-            for (int i = 0; i<_initialPoolSize; i++)
-            {
-                GameObject go = Instantiate(_dicePrefab, _diceSpawns[i].position, Quaternion.Euler(Random.insideUnitSphere));
-                go.transform.SetParent(_pool.transform);
-                _dicePoolFSM.AddDice(go);
-            }
+            InitDicePool();
         }
 
         // Update is called once per frame
         void Update()
         {
 
+        }
+        private void InitDicePool()
+        {
+            for (int i = 0; i < _initialPoolSize; i++)
+            {
+                GameObject go = Instantiate(_dicePrefab, _diceSpawns[i].position, Quaternion.Euler(Random.insideUnitSphere));
+                go.transform.SetParent(_pool.transform);
+                _dicePoolFSM.AddDice(go);
+            }
         }
     }
 }

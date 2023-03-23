@@ -92,7 +92,6 @@ namespace Gotohell.Dice
                 return DiceFace.Six;
             }
             return DiceFace.Invalid;
-
         }
     }
 }
