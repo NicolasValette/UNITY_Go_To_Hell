@@ -1,6 +1,7 @@
 using Gotohell.Dice;
 using Gotohell.FSMPoolDice;
 using Gotohell.Manager;
+using Gotohell.Poker;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -49,7 +50,7 @@ namespace Gotohell.UI
         // Update is called once per frame
         void Update()
         {
-            string str = ("Dice Values : " + _diceManager.DeathScore + "\n" + _strbuilder.ToString());
+            string str = ("Dice Values : " + _diceManager.Hand.ToString() + "\n" + _strbuilder.ToString());
             
             _valueText.text = str;
         }
@@ -59,6 +60,7 @@ namespace Gotohell.UI
             _valueText.text = "Let's Roll Dices !";
             _strbuilder.AppendLine("Dice Values : ");
             _diceDisplayed = 0;
+
         }
         public void AddValueToDisplay(DiceFace face)
         {
@@ -66,9 +68,9 @@ namespace Gotohell.UI
             _diceDisplayed++;
             _strbuilder.AppendLine("Dice #" + _diceDisplayed + " => " + (int)face);
         }
-        public void DisplayDeadsScore(int score)
+        public void DisplayDeadsScore(PokerHand hand)
         {
-            _deadsToDisplay.text = $"Beat {score} to take their souls";
+            _deadsToDisplay.text = $"Beat {hand} to take their souls";
             _deadsToDisplay.color = _looseColor;
         }
         public void RoundWin()

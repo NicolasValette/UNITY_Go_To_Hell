@@ -1,8 +1,10 @@
 using Gotohell.FSMPoolDice;
 using Gotohell.Manager;
+using Gotohell.Poker;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,13 +27,16 @@ namespace Gotohell.Dice
         [SerializeField]
         private float _timeBetweenRounds = 3f;
 
-        private int _scoreToBeat;
-        public int ScoreToBeat { get => _scoreToBeat; }
+        private PokerHand _handToBeat;
+        public PokerHand ScoreToBeat { get => _handToBeat; }
         private bool _isWin;
         public bool IsWin { get => _isWin; }
         private int _deathScore;
         public int DeathScore { get => _deathScore; }
         public Vector3 InitialPoolPosition { get; private set; }
+
+        private PokerCombinaison _pokerComb;
+        public PokerHand Hand { get => _pokerComb.ActualHand; }
 
         public static event Action NewWave;
         public static event Action RoundWin;
@@ -45,7 +50,7 @@ namespace Gotohell.Dice
         }
         void Start()
         {
-
+            _pokerComb = new PokerCombinaison();
         }
         private void OnEnable()
         {
@@ -73,6 +78,7 @@ namespace Gotohell.Dice
         }
         public void StartRound()
         {
+            _pokerComb.ChangeHand(PokerHand.None);
             _isWin = false;
             _pool.transform.SetPositionAndRotation(InitialPoolPosition, Quaternion.identity);
         }
@@ -95,29 +101,38 @@ namespace Gotohell.Dice
             }
         }
 
-        public void ScoreToBeatThisRound(int score)
+        public void ScoreToBeatThisRound(PokerHand hand)
         {
-            _scoreToBeat = score;
+            _handToBeat = hand;
         }
         public void ReadDice(DiceFace face)
         {
-            _deathScore += (int)face;
-            if (_deathScore >= _scoreToBeat)
+            //_deathScore += (int)face;
+            //if (_deathScore >= _scoreToBeat)
+            //{
+            //    Debug.Log("Win");
+            //    _isWin = true;
+            //    RoundWin?.Invoke();
+            //}
+        }
+        public void RoundFinish()
+        {
+            _pokerComb.BuildHand(_dicePoolFSM.Values);
+            int compare = _pokerComb.CompareHand(_handToBeat);
+            if (compare >= 0)
             {
                 Debug.Log("Win");
                 _isWin = true;
                 RoundWin?.Invoke();
             }
-        }
-        public void RoundFinish()
-        {
-            _scoreToBeat = 0;
-            _deathScore = 0;
-            Debug.Log("RoundFinish");
-            if (!_isWin)
+            else
             {
                 RoundLoose?.Invoke();
             }
+            _handToBeat = PokerHand.None;
+            _deathScore = 0;
+            Debug.Log("RoundFinish");
+
             StartCoroutine(WaitBetweenRound());
 
         }
