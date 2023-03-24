@@ -768,6 +768,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1177238293 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1822721524, guid: 676d8c3f3f0b2314a948879a1bde9497,
+    type: 3}
+  m_PrefabInstance: {fileID: 439838524072909076}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1181272274
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1181272275}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1181272275
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181272274}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.4527213, y: 0.993747, z: -2.8172922}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1265352357 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6807291435837006597, guid: 5af59a0681fb56748b8fc04f1c8ea940,
@@ -1339,6 +1382,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1078246390, guid: bf62c501babda44459457cec2aa5875c, type: 3}
+      propertyPath: _deadsSpawn
+      value: 
+      objectReference: {fileID: 1181272275}
     - target: {fileID: 5674873085598401284, guid: bf62c501babda44459457cec2aa5875c,
         type: 3}
       propertyPath: m_RootOrder
@@ -1411,6 +1458,11 @@ PrefabInstance:
       objectReference: {fileID: 1331290447}
     - target: {fileID: 5674873085718608719, guid: bf62c501babda44459457cec2aa5875c,
         type: 3}
+      propertyPath: _initialPoolSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5674873085718608719, guid: bf62c501babda44459457cec2aa5875c,
+        type: 3}
       propertyPath: _diceSpawns.Array.data[0]
       value: 
       objectReference: {fileID: 717812738}
@@ -1439,6 +1491,16 @@ PrefabInstance:
       propertyPath: _text
       value: 
       objectReference: {fileID: 1159351077}
+    - target: {fileID: 5674873085909351619, guid: bf62c501babda44459457cec2aa5875c,
+        type: 3}
+      propertyPath: _valueText
+      value: 
+      objectReference: {fileID: 1159351077}
+    - target: {fileID: 5674873085909351619, guid: bf62c501babda44459457cec2aa5875c,
+        type: 3}
+      propertyPath: _deadsToDisplay
+      value: 
+      objectReference: {fileID: 1177238293}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf62c501babda44459457cec2aa5875c, type: 3}
 --- !u!1001 &5879294928627859764

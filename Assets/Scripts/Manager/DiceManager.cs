@@ -80,7 +80,7 @@ namespace Gotohell.Dice
         {
             for (int i = 0; i < _initialPoolSize; i++)
             {
-                GameObject go = Instantiate(_dicePrefab, _diceSpawns[i].position, Quaternion.Euler(UnityEngine.Random.insideUnitSphere));
+                GameObject go = Instantiate(_dicePrefab, _diceSpawns[i % _diceSpawns.Count].position, Quaternion.Euler(UnityEngine.Random.insideUnitSphere));
                 go.transform.SetParent(_pool.transform);
                 _dicePoolFSM.AddDice(go);
             }
