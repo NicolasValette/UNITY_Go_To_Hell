@@ -257,7 +257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minIntensity: -0.5
   maxIntensity: 2
-  smoothing: 140
+  smoothing: 60
 --- !u!4 &763273907759792214 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f4bb398b665ddb54ea0e71490ce72027,
