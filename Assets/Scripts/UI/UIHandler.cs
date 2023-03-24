@@ -65,23 +65,6 @@ namespace Gotohell.UI
             Debug.Log("Face : " + face.ToString());
             _diceDisplayed++;
             _strbuilder.AppendLine("Dice #" + _diceDisplayed + " => " + (int)face);
-            //switch (face)
-            //{
-            //    case DiceFace.One:
-            //        break;
-            //    case DiceFace.Two:
-            //        break;
-            //    case DiceFace.Three:
-            //        break;
-            //    case DiceFace.Four:
-            //        break;
-            //    case DiceFace.Five:
-            //        break;
-            //    case DiceFace.Six:
-            //        break;
-
-            //}
-            
         }
         public void DisplayDeadsScore(int score)
         {

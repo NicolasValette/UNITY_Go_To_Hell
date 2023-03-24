@@ -15,6 +15,7 @@ namespace Gotohell.Manager
 
         private int _scoreToBeat;
         private GameObject _actualDeads;
+
         public static event Action<int> ScoreToBeat;
         // Start is called before the first frame update
         void Start()

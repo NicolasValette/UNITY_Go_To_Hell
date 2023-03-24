@@ -30,14 +30,14 @@ namespace Gotohell
             if (mouse.leftButton.wasPressedThisFrame)
             {
                 Debug.Log("click");
-                Ray rayToMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray rayToMouse = Camera.main.ScreenPointToRay(mouse.position.ReadValue());
                 RaycastHit hit;
                 if (Physics.Raycast(rayToMouse, out hit))
                 {
                     if (hit.transform.gameObject.GetComponent<DiceBehaviour>() != null)
                     {
                         OnDragDice?.Invoke(hit.transform.gameObject.transform.parent);
-                        return true ;
+                        return true;
                     }
                 }
             }
@@ -52,8 +52,6 @@ namespace Gotohell
             if (Physics.Raycast(rayToMouse, out hit))
             {
                 Vector3 vect = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-                Vector3 PawnToCamVect = vect - Camera.main.transform.position;
-
                 return vect;
             }
             return Vector3.zero;

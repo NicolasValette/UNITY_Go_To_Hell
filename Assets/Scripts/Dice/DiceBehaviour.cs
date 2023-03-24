@@ -19,9 +19,13 @@ namespace Gotohell.Dice
     [RequireComponent(typeof(Rigidbody))]
     public class DiceBehaviour : MonoBehaviour
     {
+        #region Events
         public event Action<DiceFace> OnRollFinished;
         public event Action OnRollInvalid;
+        #endregion
+
         private Rigidbody _rigidbody;
+        [SerializeField]
         private float _rollingTime = 5f;
 
         public bool IsLaunched { get; private set; }
@@ -43,7 +47,6 @@ namespace Gotohell.Dice
         }
         public IEnumerator WaitingRollingTime()
         {
-            Debug.Log("Rolling");
             yield return new WaitForSeconds(_rollingTime);
             if (_rigidbody.velocity.sqrMagnitude <= 0.01f && _rigidbody.angularVelocity.sqrMagnitude <= 0.01f)
             {
@@ -57,7 +60,6 @@ namespace Gotohell.Dice
                 {
                     OnRollFinished?.Invoke(face);
                 }
-                
             }
             else
             {

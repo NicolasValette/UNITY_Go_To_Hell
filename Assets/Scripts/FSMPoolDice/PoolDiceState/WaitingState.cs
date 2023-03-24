@@ -22,12 +22,12 @@ namespace Gotohell.FSMPoolDice.PoolDiceState
 
         public override void ExitState()
         {
-            //Do Nothing
+            //Do Nothing;
         }
 
         public override State Transition()
         {
-            return (_fsm.IsDicePoolSelected())?new DragState(_fsm):null;
+            return (_fsm.IsDicePoolSelected())? new DragState(_fsm) : null;
         }
     }
 }

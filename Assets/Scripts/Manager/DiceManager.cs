@@ -70,7 +70,6 @@ namespace Gotohell.Dice
                 InitDicePool();
                 NewWave?.Invoke();
             }
-            Debug.Log(InitialPoolPosition);
         }
         public void StartRound()
         {
@@ -130,7 +129,6 @@ namespace Gotohell.Dice
             NewWave?.Invoke();
             StartRound();
             InitDicePool();
-           
         }
 
     }

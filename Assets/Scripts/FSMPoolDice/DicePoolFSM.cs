@@ -20,6 +20,8 @@ namespace Gotohell.FSMPoolDice
         private DiceManager _diceManager;
         [SerializeField]
         private float _offset = 2;
+        [SerializeField]
+        private float _torqueForce = 25;
         private State _currentState;
         private InputManager _inputManager;
         public Transform SelectedPool { get; private set; }
@@ -28,13 +30,13 @@ namespace Gotohell.FSMPoolDice
         private List<GameObject> _listOfDice;
 
         private Vector3 _initialPosition;
+
         public static event Action<DiceFace> UpdateDice;
         public static event Action OnRollFinished;
         // Start is called before the first frame update
         private void Awake()
         {
             _listOfDice = new List<GameObject>();
-            
         }
         void Start()
         {
@@ -112,7 +114,7 @@ namespace Gotohell.FSMPoolDice
             {
                 _listOfDice[i].GetComponent<Rigidbody>().useGravity = true;
                 _listOfDice[i].GetComponent<Rigidbody>().AddForce(dir.normalized * _launchForce, ForceMode.Impulse);
-                _listOfDice[i].GetComponent<Rigidbody>().AddTorque(UnityEngine.Random.insideUnitSphere * 25);
+                _listOfDice[i].GetComponent<Rigidbody>().AddTorque(UnityEngine.Random.insideUnitSphere * _torqueForce);
                 _listOfDice[i].GetComponent<DiceBehaviour>().Launch();
             }
             
