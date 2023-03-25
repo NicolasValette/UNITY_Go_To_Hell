@@ -41,6 +41,6 @@ The game will be soon release on itch.io and will be playable on brower ! Stay t
 
 ## Authors
 
-* [Florian Thomas](https://github.com/FloThomas80)
+* [Florent Thomas](https://github.com/FloThomas80)
 * [Nicolas Valette](https://github.com/NicolasValette)
 
