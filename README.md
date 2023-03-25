@@ -39,3 +39,8 @@ After two days of development, we succed to have a fancy scene with some cool di
 
 The game will be soon release on itch.io and will be playable on brower ! Stay tuned !
 
+## Authors
+
+* Florant Thoms
+* Nicolas Valette
+
