@@ -12,9 +12,10 @@ This is an educationnal project, but made with love.
 ## Technology
 
 This game is made With Unity 2021.3.19 and written in C#.
+
 Some arts are made with Blender.
 
-We also use some fancy Unity system like the new Input System.
+We also use some fancy Unity system like the new Input System. We also use 3DSmax, Photoshop and Substance.
 
 ### Development Diary
 
