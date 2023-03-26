@@ -33,6 +33,7 @@ namespace Gotohell.FSMPoolDice
 
         public static event Action<DiceFace> UpdateDice;
         public static event Action OnRollFinished;
+        public static event Action StartEndSelectingDiceToReroll;
         // Start is called before the first frame update
         private void Awake()
         {
@@ -146,6 +147,10 @@ namespace Gotohell.FSMPoolDice
             {
                 OnRollFinished?.Invoke();
             }
+        }
+        public void DiceToReroll()
+        {
+            StartEndSelectingDiceToReroll?.Invoke();
         }
     }
 }

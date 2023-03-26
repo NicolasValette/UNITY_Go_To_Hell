@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace Gotohell.FSMPoolDice.PoolDiceState
 {
-    public class RollState : State
+    public class WaitingSelectionState : State
     {
-        public RollState(DicePoolFSM fsm) : base(fsm)
+        public WaitingSelectionState(DicePoolFSM fsm) : base(fsm)
         {
         }
 
         public override void EnterState()
         {
-           
+            _fsm.DiceToReroll();
         }
 
         public override void Execute()
@@ -21,10 +21,12 @@ namespace Gotohell.FSMPoolDice.PoolDiceState
 
         public override void ExitState()
         {
+            _fsm.DiceToReroll();
         }
+
         public override State Transition()
         {
-            return new WaitingSelectionState(_fsm);
+            return null;
         }
     }
 }

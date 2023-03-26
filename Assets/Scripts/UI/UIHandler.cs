@@ -22,6 +22,8 @@ namespace Gotohell.UI
         private Color _looseColor;
         [SerializeField]
         private DiceManager _diceManager;
+        [SerializeField]
+        private GameObject _rerollButtons;
 
         private string _displayText;
         private StringBuilder _strbuilder;
@@ -39,6 +41,7 @@ namespace Gotohell.UI
             DicePoolFSM.UpdateDice += AddValueToDisplay;
             DeadsManager.ScoreToBeat += DisplayDeadsScore;
             DiceManager.RoundWin += RoundWin;
+            DicePoolFSM.StartEndSelectingDiceToReroll += ToggleRerollButton;
         }
         private void OnDisable()
         {
@@ -46,6 +49,7 @@ namespace Gotohell.UI
             DicePoolFSM.UpdateDice -= AddValueToDisplay;
             DeadsManager.ScoreToBeat -= DisplayDeadsScore;
             DiceManager.RoundWin -= RoundWin;
+            DicePoolFSM.StartEndSelectingDiceToReroll += ToggleRerollButton;
         }
         // Update is called once per frame
         void Update()
@@ -60,7 +64,7 @@ namespace Gotohell.UI
             _valueText.text = "Let's Roll Dices !";
             _strbuilder.AppendLine("Dice Values : ");
             _diceDisplayed = 0;
-
+            _rerollButtons.SetActive(false);
         }
         public void AddValueToDisplay(DiceFace face)
         {
@@ -77,6 +81,9 @@ namespace Gotohell.UI
         {
             _deadsToDisplay.color = _winColor;
         }
-
+        public void ToggleRerollButton()
+        {
+            _rerollButtons.SetActive(!_rerollButtons.activeSelf);
+        }
     }
 }
