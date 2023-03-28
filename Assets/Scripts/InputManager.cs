@@ -18,6 +18,16 @@ namespace Gotohell
         // Update is called once per frame
         void Update()
         {
+            var keyboard = Keyboard.current;
+            if(keyboard.escapeKey.wasPressedThisFrame)
+            {
+               
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit();
+#endif
+            }
         }
 
         public bool IsDiceSelected()
