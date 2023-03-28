@@ -1,9 +1,5 @@
 using Gotohell.Dice;
-using Gotohell.FSMPoolDice;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -31,10 +27,10 @@ namespace Gotohell
             {
                 Debug.Log("click");
                 Ray rayToMouse = Camera.main.ScreenPointToRay(mouse.position.ReadValue());
-                RaycastHit hit;
-                if (Physics.Raycast(rayToMouse, out hit))
+                
+                if (Physics.Raycast(rayToMouse, out RaycastHit hit))
                 {
-                    if (hit.transform.gameObject.GetComponent<DiceBehaviour>() != null)
+                    if (hit.transform.gameObject.CompareTag("ReadyToRoll"))
                     {
                         OnDragDice?.Invoke(hit.transform.gameObject.transform.parent);
                         return true;
@@ -42,6 +38,22 @@ namespace Gotohell
                 }
             }
             return false;
+        }
+        public GameObject SelectingDiceToReroll()
+        {
+            var mouse = Mouse.current;
+            if (mouse.leftButton.wasPressedThisFrame)
+            {
+                Ray rayToMouse = Camera.main.ScreenPointToRay(mouse.position.ReadValue());
+                if (Physics.Raycast(rayToMouse, out RaycastHit hit))
+                {
+                    if (hit.transform.gameObject.GetComponent<DiceBehaviour>() != null)
+                    {
+                        return hit.transform.gameObject;
+                    }
+                }
+            }
+            return null;
         }
 
         public Vector3 GetPosition()
@@ -55,6 +67,13 @@ namespace Gotohell
                 return vect;
             }
             return Vector3.zero;
+        }
+        public Vector3 GetPosition2()
+        {
+            var mouse = Mouse.current.position.ReadValue();
+            Vector3 v = new Vector3(mouse.x, 0f, mouse.y);
+            v = Camera.main.ScreenToWorldPoint(v);
+            return v;
         }
         public bool IsDrop()
         {

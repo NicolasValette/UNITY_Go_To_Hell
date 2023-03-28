@@ -13,20 +13,23 @@ namespace Gotohell.FSMPoolDice.PoolDiceState
         public override void EnterState()
         {
             _fsm.DiceToReroll();
+            _fsm.PrepareToReroll();
         }
 
         public override void Execute()
         {
+            _fsm.SelectingDiceToReroll();
         }
 
         public override void ExitState()
         {
             _fsm.DiceToReroll();
+            _fsm.DiceSelected();
         }
 
         public override State Transition()
         {
-            return null;
+            return (_fsm.CanReroll()) ? new WaitingState(_fsm) : null;
         }
     }
 }

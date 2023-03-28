@@ -12,7 +12,7 @@ namespace Gotohell.FSMPoolDice.PoolDiceState
 
         public override void EnterState()
         {
-            //Do Nothing
+            _fsm.PrepareToRoll();
         }
 
         public override void Execute()

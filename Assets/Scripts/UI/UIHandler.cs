@@ -42,6 +42,7 @@ namespace Gotohell.UI
             DeadsManager.ScoreToBeat += DisplayDeadsScore;
             DiceManager.RoundWin += RoundWin;
             DicePoolFSM.StartEndSelectingDiceToReroll += ToggleRerollButton;
+            DicePoolFSM.RefreshingFaceValues += RefrechValueToDisplay;
         }
         private void OnDisable()
         {
@@ -50,12 +51,13 @@ namespace Gotohell.UI
             DeadsManager.ScoreToBeat -= DisplayDeadsScore;
             DiceManager.RoundWin -= RoundWin;
             DicePoolFSM.StartEndSelectingDiceToReroll += ToggleRerollButton;
+            DicePoolFSM.RefreshingFaceValues -= RefrechValueToDisplay;
         }
         // Update is called once per frame
         void Update()
         {
             string str = ("Dice Values : " + _diceManager.Hand.ToString() + "\n" + _strbuilder.ToString());
-            
+
             _valueText.text = str;
         }
         public void InitUI()
@@ -71,6 +73,17 @@ namespace Gotohell.UI
             Debug.Log("Face : " + face.ToString());
             _diceDisplayed++;
             _strbuilder.AppendLine("Dice #" + _diceDisplayed + " => " + (int)face);
+        }
+        public void RefrechValueToDisplay(List<DiceFace> faces)
+        {
+            _strbuilder = new StringBuilder();
+            _strbuilder.AppendLine("Dice Values : ");
+            _diceDisplayed = 0;
+            for (int i = 0; i < faces.Count; i++)
+            {
+                _diceDisplayed++;
+                _strbuilder.AppendLine("Dice #" + _diceDisplayed + " => " + (int)faces[i]);
+            }
         }
         public void DisplayDeadsScore(PokerHand hand)
         {

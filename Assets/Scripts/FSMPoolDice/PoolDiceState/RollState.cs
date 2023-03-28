@@ -24,7 +24,7 @@ namespace Gotohell.FSMPoolDice.PoolDiceState
         }
         public override State Transition()
         {
-            return new WaitingSelectionState(_fsm);
+            return (_fsm.IsRollFinish)? new WaitingSelectionState(_fsm) : null;
         }
     }
 }

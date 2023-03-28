@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gotohell.Dice
@@ -20,15 +19,22 @@ namespace Gotohell.Dice
     public class DiceBehaviour : MonoBehaviour
     {
         #region Events
-        public event Action<DiceFace> OnRollFinished;
+        public event Action<DiceFace> OnDiceRollFinished;
         public event Action OnRollInvalid;
         #endregion
 
         private Rigidbody _rigidbody;
         [SerializeField]
         private float _rollingTime = 5f;
+        [SerializeField]
+        private float _flickForce = 2f;
 
+        private DiceFace _face;
+        public DiceFace Face { get => _face; } 
         public bool IsLaunched { get; private set; }
+
+
+        private float _actualRolling = 0;
         // Start is called before the first frame update
         void Start()
         {
@@ -43,57 +49,86 @@ namespace Gotohell.Dice
         public void Launch()
         {
             IsLaunched = true;
+            gameObject.transform.SetParent(transform.parent.parent);
+            gameObject.tag = "Untagged";
+            _actualRolling = 0;
             StartCoroutine(WaitingRollingTime());
         }
         public IEnumerator WaitingRollingTime()
         {
-            yield return new WaitForSeconds(_rollingTime);
-            if (_rigidbody.velocity.sqrMagnitude <= 0.01f && _rigidbody.angularVelocity.sqrMagnitude <= 0.01f)
+            yield return new WaitForSeconds(0.2f);
+            while (_actualRolling < _rollingTime)
             {
-                DiceFace face = GetDiceNumber();
-                Debug.Log("Roll finish");
-                if (face == DiceFace.Invalid)
+                _actualRolling += Time.deltaTime;
+                if (_actualRolling < _rollingTime && _rigidbody.velocity.sqrMagnitude <= 0.01f && _rigidbody.angularVelocity.sqrMagnitude <= 0.01f)
                 {
-                    OnRollInvalid?.Invoke();
+                    DiceFace face = GetDiceNumber();
+                    
+                    Debug.Log("Roll finish");
+                    if (face == DiceFace.Invalid)
+                    {
+                        //Debug.Log("Invalid");
+                        //OnRollInvalid?.Invoke();
+                        //break;
+                        FlickDice();
+                    }
+                    else
+                    {
+                        OnDiceRollFinished?.Invoke(face);
+                        break;
+                    }
                 }
-                else
-                {
-                    OnRollFinished?.Invoke(face);
-                }
+                yield return null;
             }
-            else
-            {
-                OnRollInvalid?.Invoke();
-            }
+            Debug.Log("Invalid");
+            OnRollInvalid?.Invoke();
         }
 
+        private void FlickDice()
+        {
+            _rigidbody.AddForce(Vector3.up * _flickForce, ForceMode.Impulse);
+            _rigidbody.AddTorque(UnityEngine.Random.insideUnitSphere * _flickForce, ForceMode.Impulse);
+        }
         private DiceFace GetDiceNumber()
         {
             if (Vector3.Dot(transform.forward, Vector3.up) > 0.9f)
             {
-                return DiceFace.One;
+                _face = DiceFace.One;
             }
-            if (Vector3.Dot(transform.right, Vector3.up) > 0.9f)
+            else if (Vector3.Dot(transform.right, Vector3.up) > 0.9f)
             {
-                return DiceFace.Two;
+                _face = DiceFace.Two;
             }
-            if (Vector3.Dot(-transform.up, Vector3.up) > 0.9f)
+            else if (Vector3.Dot(-transform.up, Vector3.up) > 0.9f)
             {
-                return DiceFace.Three;
+                _face = DiceFace.Three;
             }
-            if (Vector3.Dot(transform.up, Vector3.up) > 0.9f)
+            else if (Vector3.Dot(transform.up, Vector3.up) > 0.9f)
             {
-                return DiceFace.Four;
+                _face = DiceFace.Four;
             }
-            if (Vector3.Dot(-transform.right, Vector3.up) > 0.9f)
+            else if (Vector3.Dot(-transform.right, Vector3.up) > 0.9f)
             {
-                return DiceFace.Five;
+                _face = DiceFace.Five;
             }
-            if (Vector3.Dot(-transform.forward, Vector3.up) > 0.9f)
+            else if (Vector3.Dot(-transform.forward, Vector3.up) > 0.9f)
             {
-                return DiceFace.Six;
+                _face = DiceFace.Six;
             }
-            return DiceFace.Invalid;
+            else
+            {
+                _face = DiceFace.Invalid;
+            }
+            return _face;
         }
+       
+        
+
     }
+
+
+
+
+
+    
 }

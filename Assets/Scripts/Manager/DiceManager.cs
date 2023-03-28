@@ -4,9 +4,7 @@ using Gotohell.Poker;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Gotohell.Dice
 {
@@ -26,6 +24,8 @@ namespace Gotohell.Dice
         private GameObject _pool;
         [SerializeField]
         private float _timeBetweenRounds = 3f;
+        [SerializeField]
+        private int _numberOfRerolls = 2;
 
         private PokerHand _handToBeat;
         public PokerHand ScoreToBeat { get => _handToBeat; }
@@ -37,11 +37,14 @@ namespace Gotohell.Dice
 
         private PokerCombinaison _pokerComb;
         public PokerHand Hand { get => _pokerComb.ActualHand; }
+        public bool IsReadyToReroll { get; private set; }
 
         public static event Action NewWave;
         public static event Action RoundWin;
         public static event Action RoundLoose;
         public static event Action CleanWave;
+
+        private int _positionIndice;
 
         // Start is called before the first frame update
         private void Awake()
@@ -51,6 +54,8 @@ namespace Gotohell.Dice
         void Start()
         {
             _pokerComb = new PokerCombinaison();
+            InitDicePool();
+            NewWave?.Invoke();
         }
         private void OnEnable()
         {
@@ -67,20 +72,20 @@ namespace Gotohell.Dice
         // Update is called once per frame
         void Update()
         {
-            var key = Keyboard.current;
+            //var key = Keyboard.current;
 
-            if (key.spaceKey.wasPressedThisFrame)
-            {
-                Debug.Log("new wave");
-                InitDicePool();
-                NewWave?.Invoke();
-            }
+            //if (key.spaceKey.wasPressedThisFrame)
+            //{
+            //    Debug.Log("new wave");
+            //    InitDicePool();
+            //    NewWave?.Invoke();
+            //}
         }
         public void StartRound()
         {
             _pokerComb.ChangeHand(PokerHand.None);
             _isWin = false;
-            _pool.transform.SetPositionAndRotation(InitialPoolPosition, Quaternion.identity);
+            ResetPoolPosition();
         }
         private void InitDicePool()
         {
@@ -88,6 +93,7 @@ namespace Gotohell.Dice
             {
                 GameObject go = Instantiate(_dicePrefab, _diceSpawns[i % _diceSpawns.Count].position, Quaternion.Euler(UnityEngine.Random.insideUnitSphere));
                 go.transform.SetParent(_pool.transform);
+                go.tag = "ReadyToRoll";
                 _dicePoolFSM.AddDice(go);
             }
         }
@@ -100,7 +106,13 @@ namespace Gotohell.Dice
                 Destroy(_pool.transform.GetChild(i).gameObject);
             }
         }
-
+        public void RerollDice(GameObject dice)
+        {
+            dice.transform.position = _diceSpawns[_positionIndice % _diceSpawns.Count].position;
+            dice.transform.rotation = UnityEngine.Random.rotation;
+            dice.transform.SetParent(_pool.transform);
+            dice.tag = "ReadyToRoll";
+        }
         public void ScoreToBeatThisRound(PokerHand hand)
         {
             _handToBeat = hand;
@@ -145,6 +157,18 @@ namespace Gotohell.Dice
             StartRound();
             InitDicePool();
         }
-
+        public void ResetPoolPosition()
+        {
+            _pool.transform.SetPositionAndRotation(InitialPoolPosition, Quaternion.identity);
+        }
+        //Method call by UI button
+        public void ReadyToReroll()
+        {
+            IsReadyToReroll = true;
+        }
+        public void WaitingForReroll()
+        {
+            IsReadyToReroll = false;
+        }
     }
 }
