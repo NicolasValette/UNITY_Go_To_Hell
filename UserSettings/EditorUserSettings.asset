@@ -5,6 +5,9 @@ EditorUserSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 4
   m_ConfigSettings:
+    MC2 preset folder:
+      value: 200b683316501b48313b182b1c2a4c1102120d38100c2323263d1223ded51a11d6de09cee8050b33062aea300802202ce10f1d18ca2a1918141aee4e42db2c3714c40ccd
+      flags: 0
     RecentlyUsedSceneGuid-0:
       value: 0607030706560a5d0c0c542715215944454f4028787c24352f2d4c6bb7b96d6a
       flags: 0
