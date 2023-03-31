@@ -120,10 +120,10 @@ TextureImporter:
       name: Dice_Emissive_Sprite_2
       rect:
         serializedVersion: 2
-        x: 200
-        y: 197.33334
+        x: 204
+        y: 97
         width: 100
-        height: 98.666664
+        height: 99
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,10 +141,10 @@ TextureImporter:
       name: Dice_Emissive_Sprite_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 99.333336
+        x: 196
+        y: 197
         width: 100
-        height: 98.666664
+        height: 99
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,9 +163,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 100
-        y: 99.333336
+        y: 94
         width: 100
-        height: 98.666664
+        height: 99
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,10 +183,10 @@ TextureImporter:
       name: Dice_Emissive_Sprite_6
       rect:
         serializedVersion: 2
-        x: 200
-        y: 99.333336
+        x: 0
+        y: 0
         width: 100
-        height: 98.666664
+        height: 99
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,10 +204,10 @@ TextureImporter:
       name: Dice_Emissive_Sprite_7
       rect:
         serializedVersion: 2
-        x: 300
-        y: 99.333336
+        x: 0
+        y: 96
         width: 100
-        height: 98.666664
+        height: 99
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,10 +225,10 @@ TextureImporter:
       name: Dice_Emissive_Sprite_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1.3333359
+        x: 300
+        y: 96
         width: 100
-        height: 98.666664
+        height: 99
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -30,6 +30,7 @@ public class UI_ChooseSprite : MonoBehaviour
     {
         _flipbookImage = GetComponent<Image>();
         LoadSpriteSheet();
+        Debug.Log("je compte :" + UI_Dice_Holder.Count);
     }
 
     private void OnEnable()
@@ -52,7 +53,7 @@ public class UI_ChooseSprite : MonoBehaviour
         {
             if (UI_Dice_Holder[i].GetComponent<Image>().sprite == null)
             { 
-                UI_Dice_Holder[i].GetComponent<Image>().sprite = Sprites[(int)face];
+                UI_Dice_Holder[i].GetComponent<Image>().sprite = Sprites[(int)face-1];
                 StartCoroutine("FadeIn", i);
                 UI_Dice_Holder[i].GetComponentInChildren<Animator>().Play("Explode", -1, 0f);
                 return;
@@ -65,7 +66,7 @@ public class UI_ChooseSprite : MonoBehaviour
         bool gotthisdice = false;
         for (int i = 0; i < UI_Dice_Holder.Count; i++)
         {
-            if (UI_Dice_Holder[i].GetComponent<Image>().sprite == Sprites[(int)face] && !gotthisdice)
+            if (UI_Dice_Holder[i].GetComponent<Image>().sprite == Sprites[(int)face-1] && !gotthisdice)
             {
                 UI_Dice_Holder[i].GetComponent<Image>().sprite = null;
                 UI_Dice_Holder[i].GetComponent<Image>().color = new Color(1, 1, 1, 0);
