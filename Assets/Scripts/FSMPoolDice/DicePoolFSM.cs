@@ -35,6 +35,7 @@ namespace Gotohell.FSMPoolDice
 
         public static event Action<DiceFace> UpdateDice;
         public static event Action OnRollFinished;
+        public static event Action<DiceFace> SelectedForReroll;
         public static event Action StartEndSelectingDiceToReroll;
         public static event Action<List<DiceFace>> RefreshingFaceValues;
 
@@ -179,9 +180,12 @@ namespace Gotohell.FSMPoolDice
         public void SelectingDiceToReroll()
         {
             GameObject dice = _inputManager.SelectingDiceToReroll();
+
             if (dice != null)
             {
                 Debug.Log("Replace");
+                DiceFace face = dice.GetComponent<DiceBehaviour>().Face;
+                SelectedForReroll?.Invoke(face);
                 RemoveDice(dice);
                 Values.Remove(dice.GetComponent<DiceBehaviour>().Face);
                 _diceToReroll.Add(dice);

@@ -35,12 +35,14 @@ public class UI_ChooseSprite : MonoBehaviour
     private void OnEnable()
     {
         DicePoolFSM.UpdateDice += Display_UI_Dice;
+        DicePoolFSM.SelectedForReroll += Remove_UI_Dice;
         //DicePoolFSM.
     }
 
     private void OnDisable()
     {
         DicePoolFSM.UpdateDice -= Display_UI_Dice;
+        DicePoolFSM.SelectedForReroll -= Remove_UI_Dice;
     }
 
     public void Display_UI_Dice(DiceFace face)
@@ -58,8 +60,23 @@ public class UI_ChooseSprite : MonoBehaviour
         }
     }
 
+    public void Remove_UI_Dice(DiceFace face)
+    {
+        bool gotthisdice = false;
+        for (int i = 0; i < UI_Dice_Holder.Count; i++)
+        {
+            if (UI_Dice_Holder[i].GetComponent<Image>().sprite == Sprites[(int)face] && !gotthisdice)
+            {
+                UI_Dice_Holder[i].GetComponent<Image>().sprite = null;
+                UI_Dice_Holder[i].GetComponent<Image>().color = new Color(1, 1, 1, 0);
+                gotthisdice = true;
+            }
+        }
+    }
 
-    private void LoadSpriteSheet()
+
+
+        private void LoadSpriteSheet()
     {
         string ImgPath = AssetDatabase.GetAssetPath(_textureToSet);
         Sprites = AssetDatabase.LoadAllAssetsAtPath(ImgPath).OfType<Sprite>().ToArray();
