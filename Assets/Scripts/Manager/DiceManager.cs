@@ -39,6 +39,7 @@ namespace Gotohell.Dice
         public PokerHand Hand { get => _pokerComb.ActualHand; }
         public bool IsReadyToReroll { get; private set; }
 
+        //events
         public static event Action NewWave;
         public static event Action RoundWin;
         public static event Action RoundLoose;

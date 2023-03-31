@@ -32,7 +32,8 @@ namespace Gotohell.Dice
         private DiceFace _face;
         public DiceFace Face { get => _face; } 
         public bool IsLaunched { get; private set; }
-
+        
+        //events
 
         private float _actualRolling = 0;
         // Start is called before the first frame update
