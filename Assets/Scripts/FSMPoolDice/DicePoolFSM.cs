@@ -38,6 +38,8 @@ namespace Gotohell.FSMPoolDice
         public static event Action<DiceFace> SelectedForReroll;
         public static event Action StartEndSelectingDiceToReroll;
         public static event Action<List<DiceFace>> RefreshingFaceValues;
+        public static event Action<List<GameObject>> OnPoolDrag;
+        public static event Action OnPoolDrop;
 
         private Vector3 _velocity;
         private float _smoothTime = 0.2f;
@@ -112,6 +114,7 @@ namespace Gotohell.FSMPoolDice
                 _listOfDice[i].GetComponentInChildren<Collider>().enabled= false;
                 //_listOfDice[i].GetComponent<Rigidbody>().isKinematic = true;
             }
+            OnPoolDrag?.Invoke(_listOfDice);
         }
         public void MoveDice()
         {
@@ -138,7 +141,7 @@ namespace Gotohell.FSMPoolDice
                 _listOfDice[i].GetComponent<Rigidbody>().AddTorque(UnityEngine.Random.insideUnitSphere * _torqueForce, ForceMode.Impulse);
                 _listOfDice[i].GetComponent<DiceBehaviour>().Launch();
             }
-            
+            OnPoolDrop?.Invoke();
         }
         public void AddDice(GameObject dice)
         {
