@@ -1795,21 +1795,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6807291435905055979, guid: 5af59a0681fb56748b8fc04f1c8ea940,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6807291435905055983, guid: 5af59a0681fb56748b8fc04f1c8ea940,
         type: 3}
       propertyPath: _diceManager
       value: 
       objectReference: {fileID: 1993008437}
-    - target: {fileID: 6807291435905055983, guid: 5af59a0681fb56748b8fc04f1c8ea940,
-        type: 3}
-      propertyPath: _torqueForce
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 6807291437434213458, guid: 5af59a0681fb56748b8fc04f1c8ea940,
         type: 3}
       propertyPath: m_Name
