@@ -28,24 +28,32 @@ namespace Gotohell.Dice
         private float _rollingTime = 5f;
         [SerializeField]
         private float _flickForce = 2f;
+        [SerializeField]
+        private float _spinnigSpeed = 1f;
 
         private DiceFace _face;
+        private Vector3 axis;
+        private bool _isSpinning = false;
         public DiceFace Face { get => _face; } 
         public bool IsLaunched { get; private set; }
-        
-        //events
+      
 
         private float _actualRolling = 0;
         // Start is called before the first frame update
         void Start()
         {
             _rigidbody = GetComponent<Rigidbody>();
+            
         }
 
         // Update is called once per frame
         void Update()
         {
-
+            if (_isSpinning)
+            {
+                transform.Rotate(axis, _spinnigSpeed * Time.deltaTime);
+            }
+            
         }
         public void Launch()
         {
@@ -53,7 +61,14 @@ namespace Gotohell.Dice
             gameObject.transform.SetParent(transform.parent.parent);
             gameObject.tag = "Untagged";
             _actualRolling = 0;
+            _isSpinning = false;
             StartCoroutine(WaitingRollingTime());
+        }
+
+        public void StartSpinnig ()
+        {
+            axis = UnityEngine.Random.insideUnitSphere;
+            _isSpinning = true;
         }
         public IEnumerator WaitingRollingTime()
         {

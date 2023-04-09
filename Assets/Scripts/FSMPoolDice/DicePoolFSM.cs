@@ -112,7 +112,8 @@ namespace Gotohell.FSMPoolDice
             {
                 _listOfDice[i].GetComponent<Rigidbody>().useGravity = false;
                 _listOfDice[i].GetComponentInChildren<Collider>().enabled= false;
-                //_listOfDice[i].GetComponent<Rigidbody>().isKinematic = true;
+                _listOfDice[i].GetComponent<Rigidbody>().isKinematic = true;
+                _listOfDice[i].GetComponent<DiceBehaviour>().StartSpinnig();
             }
             OnPoolDrag?.Invoke(_listOfDice);
         }
@@ -136,7 +137,7 @@ namespace Gotohell.FSMPoolDice
             {
                 _listOfDice[i].GetComponentInChildren<Collider>().enabled = true;
                 _listOfDice[i].GetComponent<Rigidbody>().useGravity = true;
-                //_listOfDice[i].GetComponent<Rigidbody>().isKinematic = false;
+                _listOfDice[i].GetComponent<Rigidbody>().isKinematic = false;
                 _listOfDice[i].GetComponent<Rigidbody>().AddForce(dir.normalized * _launchForce, ForceMode.Impulse);
                 _listOfDice[i].GetComponent<Rigidbody>().AddTorque(UnityEngine.Random.insideUnitSphere * _torqueForce, ForceMode.Impulse);
                 _listOfDice[i].GetComponent<DiceBehaviour>().Launch();

@@ -116,6 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rollingTime: 8
   _flickForce: 2
+  _spinnigSpeed: 100
 --- !u!1001 &944921316268812221
 PrefabInstance:
   m_ObjectHideFlags: 0
