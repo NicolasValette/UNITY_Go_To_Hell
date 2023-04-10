@@ -108,6 +108,7 @@ namespace Gotohell.FSMPoolDice
         }
         public void DragPoolDice()
         {
+            
             for (int i = 0; i < _listOfDice.Count; i++)
             {
                 _listOfDice[i].GetComponent<Rigidbody>().useGravity = false;
