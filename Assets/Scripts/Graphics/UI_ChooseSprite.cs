@@ -19,6 +19,8 @@ public class UI_ChooseSprite : MonoBehaviour
     private int DiceNumber;
     [SerializeField]
     private GameObject DiceObj;
+    [SerializeField]
+    private List<Sprite> _sprites;
 
     private Image _flipbookImage = null;
     private Sprite[] Sprites = null;
@@ -79,8 +81,12 @@ public class UI_ChooseSprite : MonoBehaviour
 
         private void LoadSpriteSheet()
     {
-        string ImgPath = AssetDatabase.GetAssetPath(_textureToSet);
-        Sprites = AssetDatabase.LoadAllAssetsAtPath(ImgPath).OfType<Sprite>().ToArray();
+        //string ImgPath = AssetDatabase.GetAssetPath(_textureToSet);
+        //Sprites = AssetDatabase.LoadAllAssetsAtPath(ImgPath).OfType<Sprite>().ToArray();
+
+        //string imgPath = _textureToSet.name;
+        //Sprites = Resources.LoadAll<Sprite>(imgPath);
+        Sprites = _sprites.ToArray();
     }
 
 

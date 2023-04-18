@@ -15,12 +15,11 @@ namespace Gotohell.Manager
         private Transform _deadsSpawn;
 
         private int _scoreToBeat;
-        private GameObject _actualDeads;
         private PokerCombinaison _pokerComb;
 
         public static event Action<PokerHand> ScoreToBeat;
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             _pokerComb= new PokerCombinaison();
         }
@@ -48,7 +47,7 @@ namespace Gotohell.Manager
         }
         public void SpawnDeads()
         {
-            _actualDeads = Instantiate(_deadsPrefab, _deadsSpawn.position, Quaternion.identity);
+           
             List<DiceFace> df = new List<DiceFace> {
                 (DiceFace)UnityEngine.Random.Range(1, 6),
                 (DiceFace)UnityEngine.Random.Range(1, 6),
@@ -62,17 +61,17 @@ namespace Gotohell.Manager
         }
         public void DestroyDeads()
         {
-            Destroy(_actualDeads);
+           
             _scoreToBeat = 0;
         }
 
         public void SendToHell()
         {
-            _actualDeads.GetComponent<Animator>().SetTrigger("Hell");
+            //_actualDeads.GetComponent<Animator>().SetTrigger("Hell");
         }
         public void SendToHeaven()
         {
-            _actualDeads.GetComponent<Animator>().SetTrigger("Heaven");
+            //_actualDeads.GetComponent<Animator>().SetTrigger("Heaven");
         }
     }
 }

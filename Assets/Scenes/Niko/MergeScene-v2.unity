@@ -705,7 +705,6 @@ GameObject:
   m_Component:
   - component: {fileID: 96830213}
   - component: {fileID: 96830216}
-  - component: {fileID: 96830215}
   - component: {fileID: 96830214}
   m_Layer: 5
   m_Name: Img_Dice1
@@ -765,28 +764,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &96830215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 96830212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7e0f045e24f9fc4abd97f74e1b0e28a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _textureToSet: {fileID: 2800000, guid: 4bf1e054977b8f349ae9aa2227a43d12, type: 3}
-  _diceFace: 0
-  DiceNumber: 0
-  DiceObj: {fileID: 0}
-  UI_Dice_Holder:
-  - {fileID: 96830212}
-  - {fileID: 509197266}
-  - {fileID: 616399402}
-  - {fileID: 941640125}
-  - {fileID: 1838933173}
 --- !u!222 &96830216
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1361,6 +1338,10 @@ PrefabInstance:
     - target: {fileID: 298335690, guid: 676d8c3f3f0b2314a948879a1bde9497, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ReadyToReroll
+      objectReference: {fileID: 0}
+    - target: {fileID: 989130413, guid: 676d8c3f3f0b2314a948879a1bde9497, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1054996493, guid: 676d8c3f3f0b2314a948879a1bde9497, type: 3}
       propertyPath: m_RootOrder
@@ -3747,7 +3728,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &869240059
 Transform:
   m_ObjectHideFlags: 0
@@ -10909,6 +10890,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34a3cd4c4b5f0df4fb19192f5f436299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1442177326 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5674873085909351620, guid: bf62c501babda44459457cec2aa5875c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1442177324}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1442177327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442177326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e0f045e24f9fc4abd97f74e1b0e28a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textureToSet: {fileID: 2800000, guid: 4bf1e054977b8f349ae9aa2227a43d12, type: 3}
+  _diceFace: 0
+  DiceNumber: 0
+  DiceObj: {fileID: 0}
+  _sprites:
+  - {fileID: -436883296, guid: 9463ea227f16e8b448fbf6b19df93b14, type: 3}
+  - {fileID: -1155367711, guid: 9463ea227f16e8b448fbf6b19df93b14, type: 3}
+  - {fileID: 1263103216, guid: 9463ea227f16e8b448fbf6b19df93b14, type: 3}
+  - {fileID: 185842968, guid: 9463ea227f16e8b448fbf6b19df93b14, type: 3}
+  - {fileID: 178341322, guid: 9463ea227f16e8b448fbf6b19df93b14, type: 3}
+  - {fileID: -592989138, guid: 9463ea227f16e8b448fbf6b19df93b14, type: 3}
+  UI_Dice_Holder:
+  - {fileID: 96830212}
+  - {fileID: 509197266}
+  - {fileID: 616399402}
+  - {fileID: 941640125}
+  - {fileID: 1838933173}
 --- !u!1 &1455284221
 GameObject:
   m_ObjectHideFlags: 0
