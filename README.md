@@ -38,7 +38,8 @@ After two days of development, we succed to have a fancy scene with some cool di
 
 ## How To play the game ?
 
-The game will be soon release on itch.io and will be playable on brower ! Stay tuned !
+The game will be soon release on itch.io and will be playable on brower !
+You can early test here : https://myoji.itch.io/dice-to-hell?secret=ZbXnVNLfQzp3m0L4LGTLnyR7aY
 
 ## Authors
 
