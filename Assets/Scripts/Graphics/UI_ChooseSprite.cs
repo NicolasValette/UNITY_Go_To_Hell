@@ -32,7 +32,7 @@ public class UI_ChooseSprite : MonoBehaviour
     {
         _flipbookImage = GetComponent<Image>();
         LoadSpriteSheet();
-        Debug.Log("je compte :" + UI_Dice_Holder.Count);
+       // Debug.Log("je compte :" + UI_Dice_Holder.Count);
     }
 
     private void OnEnable()

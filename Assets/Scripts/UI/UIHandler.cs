@@ -70,7 +70,6 @@ namespace Gotohell.UI
         }
         public void AddValueToDisplay(DiceFace face)
         {
-            Debug.Log("Face : " + face.ToString());
             _diceDisplayed++;
             _strbuilder.AppendLine("Dice #" + _diceDisplayed + " => " + (int)face);
         }

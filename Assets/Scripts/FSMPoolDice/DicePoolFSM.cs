@@ -22,7 +22,8 @@ namespace Gotohell.FSMPoolDice
         private float _torqueForce = 25;
         [SerializeField]
         private float _dragSpeed = 5f;
-        private State _currentState;
+
+        private State _currentState;                    // Current state of FSM
         private InputManager _inputManager;
         public Transform SelectedPool { get; private set; }
 
@@ -44,7 +45,7 @@ namespace Gotohell.FSMPoolDice
         private Vector3 _velocity;
         private float _smoothTime = 0.2f;
         private int _valueAdded;
-        // Start is called before the first frame update
+
         private void Awake()
         {
             _listOfDice = new List<GameObject>();
@@ -176,10 +177,8 @@ namespace Gotohell.FSMPoolDice
             UpdateDice?.Invoke(face);
             if (_valueAdded >= _listOfDice.Count) 
             {
-                Debug.Log("Finish");
                 _listOfDice.AddRange(_validDice);
                 IsRollFinish = true;
-                //OnRollFinished?.Invoke();  //break game loop, to remove asap
             }
         }
         public void SelectingDiceToReroll()
@@ -188,7 +187,6 @@ namespace Gotohell.FSMPoolDice
 
             if (dice != null)
             {
-                Debug.Log("Replace");
                 DiceFace face = dice.GetComponent<DiceBehaviour>().Face;
                 SelectedForReroll?.Invoke(face);
                 RemoveDice(dice);

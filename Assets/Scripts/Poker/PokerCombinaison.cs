@@ -62,10 +62,6 @@ namespace Gotohell.Poker
             {
                 _actualHand = PokerHand.OnePair;
             }
-            else if (distinct == 4)
-            {
-                _actualHand = PokerHand.OnePair;
-            }
             else if (distinct == 3)
             {
                 for (int i = 0; i < disctinctFace.Count; i++)

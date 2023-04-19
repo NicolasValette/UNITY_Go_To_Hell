@@ -29,7 +29,6 @@ namespace Gotohell.Dice
 
             if (keyboard.spaceKey.wasPressedThisFrame)
             {
-                Debug.Log("Lauch");
                 GameObject go = Instantiate(_dicePrefab, _diceLauncherPosition.position, Quaternion.identity);
                 go.GetComponent<Rigidbody>().AddForce(go.transform.forward * _launchForce);
                 go.GetComponent<Rigidbody>().AddTorque(Random.insideUnitSphere * 10);
@@ -38,14 +37,13 @@ namespace Gotohell.Dice
             if (mouse.leftButton.wasPressedThisFrame)
             {
 
-                Debug.Log("click");
                 Ray rayToMouse = Camera.main.ScreenPointToRay(mouse.position.ReadValue());
                 RaycastHit hit;
                 if (Physics.Raycast(rayToMouse, out hit))
                 {
                     if (hit.transform.gameObject.GetComponent<DicePoolFSM>() != null)
                     {
-                        Debug.Log("Drag");
+                      //  Debug.Log("Drag");
                     }
                 }
 

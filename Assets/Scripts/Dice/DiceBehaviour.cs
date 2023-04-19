@@ -30,6 +30,8 @@ namespace Gotohell.Dice
         private float _flickForce = 2f;
         [SerializeField]
         private float _spinnigSpeed = 1f;
+        [SerializeField]
+        private float _waitingTime = 0.2f;
 
         private DiceFace _face;
         private Vector3 axis;
@@ -72,7 +74,7 @@ namespace Gotohell.Dice
         }
         public IEnumerator WaitingRollingTime()
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(_waitingTime);
             while (_actualRolling < _rollingTime)
             {
                 _actualRolling += Time.deltaTime;
@@ -80,12 +82,8 @@ namespace Gotohell.Dice
                 {
                     DiceFace face = GetDiceNumber();
                     
-                    Debug.Log("Roll finish");
                     if (face == DiceFace.Invalid)
                     {
-                        //Debug.Log("Invalid");
-                        //OnRollInvalid?.Invoke();
-                        //break;
                         FlickDice();
                     }
                     else
@@ -96,7 +94,6 @@ namespace Gotohell.Dice
                 }
                 yield return null;
             }
-            Debug.Log("Invalid");
             OnRollInvalid?.Invoke();
         }
 
@@ -137,9 +134,6 @@ namespace Gotohell.Dice
             }
             return _face;
         }
-       
-        
-
     }
 
 
