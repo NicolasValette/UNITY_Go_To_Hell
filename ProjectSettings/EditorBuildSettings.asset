@@ -6,6 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  m_configObjects: {}
+    path: Assets/Scenes/Niko/NikoScene.unity
+    guid: a1304c7fd178c6d47a35aa1b92014695
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 5069917ef76dba84bb711fc87f4282e3,
+      type: 2}
