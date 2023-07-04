@@ -35,10 +35,15 @@ After two days of development, we succed to have a fancy scene with some cool di
 
 ![movie_002 (1)](https://user-images.githubusercontent.com/88431570/227711152-86c6c040-cb30-4dcc-a316-5bcbf76d426f.gif)
 
+We add a cool UI & effects to see dices values
+
+![Movie_031Unity_Go_To_Hell2023-04-18_AdobeExpress(1)](https://user-images.githubusercontent.com/88431570/233118604-8b4114ae-ad94-4d63-b96a-31bca4771480.gif)
+
 
 ## How To play the game ?
 
-The game will be soon release on itch.io and will be playable on brower ! Stay tuned !
+The game will be soon release on itch.io and will be playable on brower !
+You can early test here : https://myoji.itch.io/dice-to-hell?secret=ZbXnVNLfQzp3m0L4LGTLnyR7aY
 
 ## Authors
 
