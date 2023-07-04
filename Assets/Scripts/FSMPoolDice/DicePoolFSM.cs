@@ -34,13 +34,13 @@ namespace Gotohell.FSMPoolDice
         private List<GameObject> _diceToReroll;
         private Vector3 _initialPosition;
 
-        public static event Action<DiceFace> UpdateDice;
-        public static event Action OnRollFinished;
-        public static event Action<DiceFace> SelectedForReroll;
-        public static event Action StartEndSelectingDiceToReroll;
-        public static event Action<List<DiceFace>> RefreshingFaceValues;
-        public static event Action<List<GameObject>> OnPoolDrag;
-        public static event Action OnPoolDrop;
+        public static event Action<DiceFace> UpdateDice;                    // When a dice value is updated (the dice finish rolling)
+        public static event Action OnRollFinished;                          // When roll is over
+        public static event Action<DiceFace> SelectedForReroll;             // When a dice is picked for reroll
+        public static event Action StartEndSelectingDiceToReroll;           // Start and end of reroll selecing moment
+        public static event Action<List<DiceFace>> RefreshingFaceValues;    
+        public static event Action<List<GameObject>> OnPoolDrag;            // When we pick dice pool
+        public static event Action OnPoolDrop;                              // when we drop dice pool
 
         private Vector3 _velocity;
         private float _smoothTime = 0.2f;
@@ -88,7 +88,7 @@ namespace Gotohell.FSMPoolDice
         }
         private void ChangeState(State _nextState)
         {
-            string str = "###Change state frome (" + _currentState.ToString() + ") to ";
+            string str = "###Change state from (" + _currentState.ToString() + ") to ";
             _currentState.ExitState();
             _currentState = _nextState;
             _currentState.EnterState();

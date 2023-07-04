@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Niko/NikoScene.unity
-    guid: a1304c7fd178c6d47a35aa1b92014695
+    path: Assets/Scenes/Niko/MergeScene-v2.unity
+    guid: 59e95e7aba960b04fa836a8630ea427c
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 5069917ef76dba84bb711fc87f4282e3,
       type: 2}

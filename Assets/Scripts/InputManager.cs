@@ -35,7 +35,6 @@ namespace Gotohell
             var mouse = Mouse.current;
             if (mouse.leftButton.wasPressedThisFrame)
             {
-                Debug.Log("click");
                 Ray rayToMouse = Camera.main.ScreenPointToRay(mouse.position.ReadValue());
                 
                 if (Physics.Raycast(rayToMouse, out RaycastHit hit))
